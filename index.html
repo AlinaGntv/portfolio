@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>devopix/alina/portfolio.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #050505;
+            --bg-secondary: #0a0a0a;
+            --bg-card: #0f0f0f;
+            --bg-hover: #1a1a1a;
+            --text-primary: #f5f5f5;
+            --text-secondary: #737373;
+            --accent: #c0c0c0;
+            --accent-light: #e8e8e8;
+            --accent-dark: #808080;
+            --border: #262626;
+            --radius: 2px;
+            --radius-sm: 1px;
+            --pixel: 'Press Start 2P', cursive;
+            --main: 'Space Grotesk', sans-serif;
+        }
+
+        body {
+            font-family: var(--main);
+            background: linear-gradient(180deg, #050505 0%, #0a0a0a 50%, #050505 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse at top, rgba(192, 192, 192, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom, rgba(192, 192, 192, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: linear-gradient(145deg, #0f0f0f 0%, #080808 100%);
+            border-radius: var(--radius);
+            padding: 32px;
+            border: 1px solid var(--border);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(192, 192, 192, 0.3), transparent);
+            pointer-events: none;
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, transparent 50%, rgba(255, 255, 255, 0.02) 100%);
+            opacity: 0;
+            transition: opacity 0.4s;
+            pointer-events: none;
+        }
+
+        .card:hover::after {
+            opacity: 1;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(192, 192, 192, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(192, 192, 192, 0.1);
+        }
+
+        .card-full {
+            grid-column: span 2;
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            position: relative;
+            z-index: 1;
+            flex-wrap: wrap;
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: var(--radius);
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            flex-shrink: 0;
+            border: 1px solid var(--border);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.05),
+                0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .avatar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s;
+            pointer-events: none;
+        }
+
+        .avatar:hover::before {
+            left: 100%;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-content h1 {
+            font-family: var(--pixel);
+            font-size: 14px;
+            margin-bottom: 16px;
+            font-weight: 400;
+            line-height: 1.5;
+            color: var(--accent-light);
+            letter-spacing: -1px;
+        }
+
+        .hero-content .subtitle {
+            font-family: var(--main);
+            font-size: 13px;
+            margin-bottom: 16px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+
+        .hero-content .description {
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.8;
+            max-width: 600px;
+            font-weight: 300;
+        }
+
+        .hero-cta {
+            flex-shrink: 0;
+        }
+
+        .hero-cta-button {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(145deg, #1a1a1a 0%, #0f0f0f 100%);
+            border: 1px solid var(--accent);
+            color: var(--accent-light) !important;
+            font-weight: 600;
+            letter-spacing: 2px;
+            padding: 16px 32px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-family: var(--pixel);
+            font-size: 9px;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .hero-cta-button:hover {
+            background: linear-gradient(145deg, #252525 0%, #1a1a1a 100%);
+            box-shadow: 0 0 20px rgba(192, 192, 192, 0.25);
+            transform: translateY(-2px);
+        }
+
+        h2 {
+            font-family: var(--pixel);
+            font-size: 10px;
+            margin-bottom: 28px;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+            display: inline-block;
+            font-weight: 400;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, var(--accent-dark), transparent);
+            pointer-events: none;
+        }
+
+        h3 {
+            font-family: var(--main);
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+            font-weight: 600;
+            letter-spacing: -0.3px;
+        }
+
+        .category-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 32px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .category-btn {
+            background: linear-gradient(145deg, #151515 0%, #0a0a0a 100%);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 14px 28px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s;
+            font-family: var(--pixel);
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            user-select: none;
+            z-index: 2;
+        }
+
+        .category-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(192, 192, 192, 0.1), transparent);
+            transition: left 0.4s;
+            pointer-events: none;
+        }
+
+        .category-btn:hover::before {
+            left: 100%;
+        }
+
+        .category-btn:hover {
+            border-color: rgba(192, 192, 192, 0.4);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .category-btn.active {
+            background: linear-gradient(145deg, #262626 0%, #1a1a1a 100%);
+            color: var(--accent-light);
+            border-color: rgba(192, 192, 192, 0.3);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.05),
+                0 0 20px rgba(192, 192, 192, 0.1);
+        }
+
+        .projects-container {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .projects-container.active {
+            display: block;
+        }
+
+        .project {
+            margin-bottom: 32px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+        }
+
+        .project:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .project::before {
+            content: '›';
+            position: absolute;
+            left: -20px;
+            top: 0;
+            color: var(--accent);
+            font-family: var(--main);
+            font-size: 20px;
+            opacity: 0;
+            transition: all 0.3s;
+            transform: translateX(-10px);
+            pointer-events: none;
+        }
+
+        .project:hover::before {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .project-title {
+            font-family: var(--main);
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+        }
+
+        .project-date {
+            font-family: var(--pixel);
+            font-size: 7px;
+            color: var(--accent);
+            background: linear-gradient(145deg, #1a1a1a 0%, #0f0f0f 100%);
+            padding: 8px 14px;
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+            border: 1px solid var(--border);
+            letter-spacing: 1px;
+        }
+
+        .project-type {
+            font-size: 12px;
+            color: var(--accent-dark);
+            margin-bottom: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .project-desc {
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 16px;
+            font-weight: 300;
+        }
+
+        .project-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .project-links {
+            margin-top: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--pixel);
+            font-size: 7px;
+            color: var(--accent-light);
+            text-decoration: none;
+            background: linear-gradient(145deg, #1a1a1a 0%, #0f0f0f 100%);
+            padding: 10px 20px;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(192, 192, 192, 0.3);
+            transition: all 0.3s;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        .project-link::before {
+            content: '↗';
+            font-size: 8px;
+        }
+
+        .project-link:hover {
+            color: #ffffff;
+            border-color: var(--accent);
+            background: linear-gradient(145deg, #252525 0%, #151515 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(192, 192, 192, 0.15);
+        }
+
+        .stack-item {
+            font-family: var(--pixel);
+            font-size: 6px;
+            color: var(--text-secondary);
+            background: linear-gradient(145deg, #151515 0%, #0a0a0a 100%);
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+            letter-spacing: 0.5px;
+        }
+
+        .stack-item:hover {
+            border-color: rgba(192, 192, 192, 0.3);
+            color: var(--accent);
+            transform: scale(1.02);
+        }
+
+        .stack-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 28px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stack-category-btn {
+            background: linear-gradient(145deg, #151515 0%, #0a0a0a 100%);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 14px 28px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s;
+            font-family: var(--pixel);
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            user-select: none;
+            z-index: 2;
+        }
+
+        .stack-category-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(192, 192, 192, 0.1), transparent);
+            transition: left 0.4s;
+            pointer-events: none;
+        }
+
+        .stack-category-btn:hover::before {
+            left: 100%;
+        }
+
+        .stack-category-btn:hover {
+            border-color: rgba(192, 192, 192, 0.4);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .stack-category-btn.active {
+            background: linear-gradient(145deg, #262626 0%, #1a1a1a 100%);
+            color: var(--accent-light);
+            border-color: rgba(192, 192, 192, 0.3);
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.05),
+                0 0 20px rgba(192, 192, 192, 0.1);
+        }
+
+        .stack-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .stack-content.active {
+            display: block;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .skill-item {
+            background: linear-gradient(145deg, #151515 0%, #0a0a0a 100%);
+            padding: 16px 24px;
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            border: 1px solid var(--border);
+            font-weight: 400;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            color: var(--text-secondary);
+            cursor: default;
+        }
+
+        .skill-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(192, 192, 192, 0.05), transparent);
+            transition: left 0.4s;
+            pointer-events: none;
+        }
+
+        .skill-item:hover::before {
+            left: 100%;
+        }
+
+        .skill-item:hover {
+            border-color: rgba(192, 192, 192, 0.3);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .contact-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+            position: relative;
+        }
+
+        .contact-bar::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 200px;
+            height: 1px;
+            background: linear-gradient(90deg, var(--accent-dark), transparent);
+            pointer-events: none;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 13px;
+            transition: all 0.3s;
+            background: linear-gradient(145deg, #151515 0%, #0a0a0a 100%);
+            padding: 16px 28px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            font-weight: 400;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+            z-index: 2;
+        }
+
+        .contact-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(192, 192, 192, 0.1), transparent);
+            transition: left 0.4s;
+            pointer-events: none;
+        }
+
+        .contact-link:hover::before {
+            left: 100%;
+        }
+
+        .contact-link:hover {
+            color: var(--accent);
+            border-color: rgba(192, 192, 192, 0.3);
+            transform: translateY(-1px);
+        }
+
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: linear-gradient(145deg, #0f0f0f 0%, #080808 100%);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px;
+            max-width: 400px;
+            width: 90%;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content h3 {
+            font-family: var(--pixel);
+            font-size: 10px;
+            margin-bottom: 24px;
+            text-align: center;
+            color: var(--accent);
+        }
+
+        .modal-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .modal-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 16px;
+            background: linear-gradient(145deg, #151515 0%, #0a0a0a 100%);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-family: var(--pixel);
+            font-size: 9px;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .modal-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent-light);
+            transform: translateY(-2px);
+        }
+
+        .close-modal {
+            margin-top: 20px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 8px;
+            font-family: var(--pixel);
+            color: var(--text-secondary);
+            padding: 12px;
+        }
+
+        .close-modal:hover {
+            color: var(--accent);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card-full {
+                grid-column: span 1;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                gap: 30px;
+            }
+
+            .hero-content h1 {
+                font-size: 12px;
+            }
+
+            .hero-cta-button {
+                justify-content: center;
+            }
+
+            .contact-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .category-buttons,
+            .stack-categories {
+                justify-content: center;
+            }
+
+            h2 {
+                font-size: 8px;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--border), var(--accent-dark));
+            border-radius: 0;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, var(--accent-dark), var(--accent));
+        }
+
+        ::selection {
+            background: rgba(192, 192, 192, 0.2);
+            color: var(--text-primary);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="bento-grid" style="margin-bottom: 20px;">
+            <div class="card card-full">
+                <div class="hero">
+                    <div class="avatar">◈</div>
+                    <div class="hero-content">
+                        <h1>DEVOPIX_ALINA</h1>
+                        <div class="subtitle">Автоматизация // AI // Backend</div>
+                        <div class="description">
+                            Разрабатываю ботов, веб-сервисы и автоматизации, которые экономят время и увеличивают
+                            прибыль
+                        </div>
+                    </div>
+                    <div class="hero-cta">
+                        <div class="hero-cta-button"
+                            onclick="document.getElementById('contactModal').classList.add('active')">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                            </svg>
+                            💬 НАПИСАТЬ МНЕ
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects Section with Categories -->
+        <div class="card card-full">
+            <h2>// КЕЙСЫ_И_ПРОЕКТЫ</h2>
+
+            <div class="category-buttons">
+                <button class="category-btn active" data-target="proj-personal">[ ЛИЧНЫЕ ]</button>
+                <button class="category-btn" data-target="proj-backend">[ BACKEND ]</button>
+                <button class="category-btn" data-target="proj-automation">[ АВТО ]</button>
+                <button class="category-btn" data-target="proj-integrations">[ API ]</button>
+                <button class="category-btn" data-target="proj-bots">[ БОТЫ ]</button>
+                <button class="category-btn" data-target="proj-analytics">[ DATA ]</button>
+            </div>
+
+            <!-- Личные проекты -->
+            <div id="proj-personal" class="projects-container active">
+                <div class="project">
+                    <div class="project-header">
+                        <div class="project-title">AI-сервис анализа внешности</div>
+                        <span class="project-date">TG+WEB</span>
+                    </div>
+                    <div class="project-type">Telegram-бот + Web-приложение</div>
+                    <div class="project-desc">
+                        Разработка Telegram-бота с анализом фото через LLM, перенос продукта в веб-приложение,
+                        настройка серверной логики и взаимодействие с AI. Готовый продукт с возможностью
+                        масштабирования.
+                    </div>
+                    <div class="project-stack">
+                        <span class="stack-item">PYTHON</span>
+                        <span class="stack-item">AIogram</span>
+                        <span class="stack-item">REACT</span>
+                        <span class="stack-item">NEXT.js</span>
+                        <span class="stack-item">LLM</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://chadmetrix.ru" target="_blank" class="project-link"> ПОСМОТРЕТЬ САЙТ </a>
+                    </div>
+                </div>
+
+                <div class="project">
+                    <div class="project-header">
+                        <div class="project-title">Сервис заказа одежды по меркам</div>
+                        <span class="project-date">MERKA.RU</span>
+                    </div>
+                    <div class="project-type">Веб-приложение с личным кабинетом</div>
+                    <div class="project-desc">
+                        Веб-приложение с личным кабинетом и админкой, система заказов на основе пользовательских данных,
+                        работа с БД. Полноценный прототип сервиса.
+                    </div>
+                    <div class="project-stack">
+                        <span class="stack-item">LARAVEL</span>
+                        <span class="stack-item">PHP</span>
+                        <span class="stack-item">MYSQL</span>
+                        <span class="stack-item">DOCKER</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/AlinaGntv/merkaru.git" target="_blank" class="project-link"> GITHUB
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Backend & CMS -->
+            <div id="proj-backend" class="projects-container">
+                <div class="project">
+                    <div class="project-header">
+                        <div class="project-title">Доработка интернет-магазина</div>
+                        <span class="project-date">MOGUTA</span>
+                    </div>
+                    <div class="project-type">Backend-логика, динамическая генерация</div>
+                    <div class="project-desc">
+                        Разбор архитектуры CMS (PHP + MySQL), изучение серверной логики генерации страниц (product.php),
+                        доработка алгоритма формирования путей к изображениям товаров, распределение файлов по папкам на
+                        основе ID.
+                    </div>
+                    <div class="project-stack">
+                        <span class="stack-item">PHP</span>
+                        <span class="stack-item">MYSQL</span>
+                        <span class="stack-item">Moguta</span>
+                        <span class="stack-item">HTML</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://izs-pro.ru" target="_blank" class="project-link"> ПОСМОТРЕТЬ САЙТ </a>
+                    </div>
+                </div>
+
+                <div class="project">
+                    <div class="project-header">
+                        <div class="project-title">Настройка VPS сервера</div>
+                        <span class="project-date">DEVOPS</span>
+                    </div>
+                    <div class="project-type">Серверная инфраструктура</div>
+                    <div class="project-desc">
+                        Настройка удалённого сервера (VPS) для размещения проектов, работа с веб-сервером Nginx,
+                        настройка запуска приложений и доступа к ним, работа через консоль (SSH).
+                    </div>
+                    <div class="project-stack">
+                        <span class="stack-item">VPS</span>
+                        <span class="stack-item">NGINX</span>
+                        <span class="stack-item">LINUX</span>
+                        <span class="stack-item">SSH</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Автоматизация -->
+            <div id="proj-automation" class="projects-container">
+                <div class="project">
+                    <div class="project-header">
+                        <div class="project-title">Автоматизация маркетинга</div>
+                        <span class="project-date">MAKE</span>
+                    </div>
+                    <div class="project-type">UTM-метки, интеграции, кастомный JS</div>
+                    <div class="project-desc">
+                        Настройка передачи UTM-меток с сайта в Telegram, реализация автоматизации через Make,
+                        внедрение кастомного JavaScript для сбора данных.
+                    </div>
+                    <div class="project-stack">
+                        <span class="stack-item">JS</span>
+                        <span class="stack-item">MAKE</span>
+                        <span class="stack-item">TILDA</span>
+                        <span class="stack-item">WEBHOOKS</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://double-move.com" target="_blank" class="project-link"> ПОСМОТРЕТЬ САЙТ </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Интеграции & CRM -->
+            <div id="proj-integrations" class="projects-container">
+                <div class="project">
+                    <div class="project-header">
+                        <div class="project-title">Интеграции CRM и телефонии</div>
+                        <span class="project-date">API</span>
+                    </div>
+                    <div class="project-type">Синхронизация данных между системами</div>
+                    <div class="project-desc">
+                        Настройка работы API между различными сервисами, обеспечение передачи и обработки данных.
+                    </div>
+                    <div class="project-stack">
+                        <span class="stack-item">REST_API</span>
+                        <span class="stack-item">THUMBTACK</span>
+                        <span class="stack-item">RINGCENTRAL</span>
+                        <span class="stack-item">RINGOSTAT</span>
+                        <span class="stack-item">SMARTMOVING</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Боты & Платежи -->
+            <div id="proj-bots" class="projects-container">
+                <div class="project">
+                    <div class="project-header">
+                        <div class="project-title">Telegram-бот с подпиской</div>
+                        <span class="project-date">PAYMENTS</span>
+                    </div>
+                    <div class="project-type">Доработка логики подписок</div>
+                    <div class="project-desc">
+                        Исправление логики подписок, настройка интеграции платежной системы Robokassa.
+                    </div>
+                    <div class="project-stack">
+                        <span class="stack-item">PYTHON</span>
+                        <span class="stack-item">BOT_API</span>
+                        <span class="stack-item">ROBOKASSA</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://t.me/pilates_fitness_bot" target="_blank" class="project-link"> ПЕРЕЙТИ В БОТ
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Аналитика -->
+            <div id="proj-analytics" class="projects-container">
+                <div class="project">
+                    <div class="project-header">
+                        <div class="project-title">Дашборд аналитики</div>
+                        <span class="project-date">KLIPFOLIO</span>
+                    </div>
+                    <div class="project-type">Маркетинговая аналитика</div>
+                    <div class="project-desc">
+                        Сбор системы аналитики с несколькими источниками данных, подключение маркетинговых API.
+                    </div>
+                    <div class="project-stack">
+                        <span class="stack-item">KLIPFOLIO</span>
+                        <span class="stack-item">GOOGLE_ADS</span>
+                        <span class="stack-item">GUARANTEE</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Stack Section -->
+        <div class="card card-full" style="margin-top: 20px;">
+            <h2>// СТЕК_И_НАВЫКИ</h2>
+
+            <div class="stack-categories">
+                <button class="stack-category-btn active" data-target="stack-frontend">[ FRONT ]</button>
+                <button class="stack-category-btn" data-target="stack-backend">[ BACK ]</button>
+                <button class="stack-category-btn" data-target="stack-cms">[ CMS ]</button>
+                <button class="stack-category-btn" data-target="stack-integrations">[ INT ]</button>
+                <button class="stack-category-btn" data-target="stack-devops">[ OPS ]</button>
+                <button class="stack-category-btn" data-target="stack-ai">[ AI ]</button>
+                <button class="stack-category-btn" data-target="stack-other">[ ETC ]</button>
+            </div>
+
+            <div id="stack-frontend" class="stack-content active">
+                <div class="skill-list">
+                    <span class="skill-item">HTML</span>
+                    <span class="skill-item">CSS</span>
+                    <span class="skill-item">JavaScript</span>
+                    <span class="skill-item">React</span>
+                    <span class="skill-item">Next.js</span>
+                    <span class="skill-item">Tilda</span>
+                </div>
+            </div>
+
+            <div id="stack-backend" class="stack-content">
+                <div class="skill-list">
+                    <span class="skill-item">PHP</span>
+                    <span class="skill-item">Laravel</span>
+                    <span class="skill-item">Python</span>
+                    <span class="skill-item">Aiogram</span>
+                    <span class="skill-item">MySQL</span>
+                    <span class="skill-item">phpMyAdmin</span>
+                </div>
+            </div>
+
+            <div id="stack-cms" class="stack-content">
+                <div class="skill-list">
+                    <span class="skill-item">Moguta CMS</span>
+                    <span class="skill-item">Динамическая генерация</span>
+                    <span class="skill-item">Чужой код</span>
+                    <span class="skill-item">Tilda кастомизация</span>
+                    <span class="skill-item">Алгоритмы путей</span>
+                </div>
+            </div>
+
+            <div id="stack-integrations" class="stack-content">
+                <div class="skill-list">
+                    <span class="skill-item">Make</span>
+                    <span class="skill-item">REST API</span>
+                    <span class="skill-item">Webhooks</span>
+                    <span class="skill-item">Klipfolio</span>
+                    <span class="skill-item">Robokassa</span>
+                    <span class="skill-item">Thumbtack</span>
+                    <span class="skill-item">RingCentral</span>
+                    <span class="skill-item">Ringostat</span>
+                    <span class="skill-item">SmartMoving</span>
+                    <span class="skill-item">Google Ads API</span>
+                </div>
+            </div>
+
+            <div id="stack-devops" class="stack-content">
+                <div class="skill-list">
+                    <span class="skill-item">VPS</span>
+                    <span class="skill-item">Nginx</span>
+                    <span class="skill-item">Linux</span>
+                    <span class="skill-item">SSH</span>
+                    <span class="skill-item">Docker</span>
+                </div>
+            </div>
+
+            <div id="stack-ai" class="stack-content">
+                <div class="skill-list">
+                    <span class="skill-item">LLM-интеграции</span>
+                    <span class="skill-item">Анализ изображений</span>
+                    <span class="skill-item">AI API</span>
+                </div>
+            </div>
+
+            <div id="stack-other" class="stack-content">
+                <div class="skill-list">
+                    <span class="skill-item">Git</span>
+                    <span class="skill-item">GitHub Pages</span>
+                    <span class="skill-item">Консоль</span>
+                    <span class="skill-item">Разбор кода</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contacts -->
+        <div class="contact-bar">
+            <div style="font-family: var(--pixel); font-size: 7px; color: var(--text-secondary); letter-spacing: 1px;">
+                [C] 2026_DEVOPIX_ALINA
+            </div>
+            <div class="contact-links">
+                <a href="https://github.com/AlinaGntv" target="_blank" class="contact-link">
+                    <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                    </svg>
+                    GitHub
+                </a>
+                <a href="https://t.me/shpekovic" target="_blank" class="contact-link">
+                    <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                    </svg>
+                    Telegram
+                </a>
+                <div class="contact-link" style="cursor: pointer;"
+                    onclick="navigator.clipboard.writeText('gntv.surname@gmail.com'); alert('Email скопирован!');">
+                    <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                    </svg>
+                    gntv.surname@gmail.com
+                </div>
+                <a href="https://kwork.ru/user/coreengine" target="_blank" class="contact-link">
+                    <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    Kwork
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно выбора контакта -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <h3>// ВЫБЕРИТЕ_СПОСОБ</h3>
+            <div class="modal-buttons">
+                <a href="https://t.me/shpekovic" target="_blank" class="modal-btn"
+                    onclick="document.getElementById('contactModal').classList.remove('active')">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                    </svg>
+                    TELEGRAM
+                </a>
+                <a href="https://kwork.ru/user/coreengine" target="_blank" class="modal-btn"
+                    onclick="document.getElementById('contactModal').classList.remove('active')">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    KWORK
+                </a>
+                <div class="modal-btn"
+                    onclick="navigator.clipboard.writeText('gntv.surname@gmail.com'); alert('Email скопирован!'); document.getElementById('contactModal').classList.remove('active');">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                    </svg>
+                    КОПИРОВАТЬ EMAIL
+                </div>
+            </div>
+            <div class="close-modal" onclick="document.getElementById('contactModal').classList.remove('active')">
+                [ ЗАКРЫТЬ ]
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Обработка кликов на кнопки категорий проектов
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const targetId = this.getAttribute('data-target');
+
+                if (!targetId) return;
+
+                // Убираем active у всех кнопок
+                document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                // Добавляем active к нажатой
+                this.classList.add('active');
+
+                // Скрываем все контейнеры
+                document.querySelectorAll('.projects-container').forEach(c => c.classList.remove(
+                    'active'));
+                // Показываем нужный
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.classList.add('active');
+                }
+            });
+        });
+
+        // Обработка кликов на кнопки стека
+        document.querySelectorAll('.stack-category-btn').forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const targetId = this.getAttribute('data-target');
+
+                if (!targetId) return;
+
+                // Убираем active у всех кнопок
+                document.querySelectorAll('.stack-category-btn').forEach(b => b.classList.remove(
+                    'active'));
+                // Добавляем active к нажатой
+                this.classList.add('active');
+
+                // Скрываем все контейнеры
+                document.querySelectorAll('.stack-content').forEach(c => c.classList.remove('active'));
+                // Показываем нужный
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.classList.add('active');
+                }
+            });
+        });
+
+        // Анимация при скролле
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card').forEach((card, index) => {
+            card.style.opacity = "0";
+            card.style.transform = "translateY(20px)";
+            card.style.transition = `all 0.6s ease ${index * 0.1}s`;
+            observer.observe(card);
+        });
+    </script>
+</body>
+
+</html>
