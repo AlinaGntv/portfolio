@@ -84,6 +84,7 @@
   - `models.py` — модель `Organization` (org_id, имя, адрес, телефон, сайт, рейтинг, координаты и т.д.)
   - Тесты: `test_dedup.py` — юнит-тесты дедупликации
 - **Стек:** Python, Playwright, tkinter, OpenPyXL, Yandex Maps, Web scraping
+- **Ссылка:** [github.com/AlinaGntv/leads-parser-ya-maps](https://github.com/AlinaGntv/leads-parser-ya-maps.git)
 
 ---
 
