@@ -833,6 +833,7 @@
                 <button class="category-btn active" data-target="proj-personal">[ ЛИЧНЫЕ ]</button>
                 <button class="category-btn" data-target="proj-backend">[ BACKEND ]</button>
                 <button class="category-btn" data-target="proj-automation">[ АВТО ]</button>
+                <button class="category-btn" data-target="proj-parsing">[ ПАРСИНГ ]</button>
                 <button class="category-btn" data-target="proj-integrations">[ API ]</button>
                 <button class="category-btn" data-target="proj-bots">[ БОТЫ ]</button>
                 <button class="category-btn" data-target="proj-analytics">[ DATA ]</button>
@@ -1000,6 +1001,52 @@
                         <span class="stack-item">WEBHOOKS</span>
                     </div>
                 </div>
+
+                <div class="project">
+                    <div class="project-header">
+                        <div class="project-title">Quote Runner → Telegram уведомления</div>
+                        <span class="project-date">MAKE</span>
+                    </div>
+                    <div class="project-type">Автоматизация обработки почты</div>
+                    <div class="project-desc">
+                        Автоматизация в Make, которая ловит входящие письма от Quote Runner в почте
+                        и автоматически пересылает их в рабочий Telegram-чат. Свежие заявки и ставки
+                        попадают в чат команды сразу после прихода, без ручной проверки почты.
+                    </div>
+                    <div class="project-stack">
+                        <span class="stack-item">MAKE</span>
+                        <span class="stack-item">EMAIL</span>
+                        <span class="stack-item">TELEGRAM API</span>
+                        <span class="stack-item">WEBHOOKS</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Парсинг & Лидогенерация -->
+            <div id="proj-parsing" class="projects-container">
+                <div class="project">
+                    <div class="project-header">
+                        <div class="project-title">Парсер лидов через Яндекс Карты</div>
+                        <span class="project-date">SCRAPER</span>
+                    </div>
+                    <div class="project-type">Конвейер парсинга из 8 модулей (CLI + GUI)</div>
+                    <div class="project-desc">
+                        Парсер, который собирает организации в Яндекс Картах по нише и городу
+                        и формирует Excel-файл лидов для ручной квалификации. Полный конвейер:
+                        генерация сетки запросов → поиск → скролл выдачи → разбор карточек →
+                        дедупликация → геофильтр → экспорт. Playwright маскируется под обычного
+                        пользователя с постоянным Chromium-профилем, контроль троттлинга, экспорт
+                        в Excel с выпадающими списками для ручной квалификации.
+                    </div>
+                    <div class="project-stack">
+                        <span class="stack-item">PYTHON</span>
+                        <span class="stack-item">PLAYWRIGHT</span>
+                        <span class="stack-item">YANDEX MAPS</span>
+                        <span class="stack-item">TKINTER</span>
+                        <span class="stack-item">OPENPYXL</span>
+                        <span class="stack-item">SCRAPING</span>
+                    </div>
+                </div>
             </div>
 
             <!-- Интеграции & CRM -->
@@ -1094,6 +1141,7 @@
             <div class="stack-categories">
                 <button class="stack-category-btn active" data-target="stack-frontend">[ FRONT ]</button>
                 <button class="stack-category-btn" data-target="stack-backend">[ BACK ]</button>
+                <button class="stack-category-btn" data-target="stack-scraping">[ PARSING ]</button>
                 <button class="stack-category-btn" data-target="stack-cms">[ CMS ]</button>
                 <button class="stack-category-btn" data-target="stack-integrations">[ INT ]</button>
                 <button class="stack-category-btn" data-target="stack-devops">[ OPS ]</button>
@@ -1121,6 +1169,16 @@
                     <span class="skill-item">Aiogram</span>
                     <span class="skill-item">MySQL</span>
                     <span class="skill-item">phpMyAdmin</span>
+                </div>
+            </div>
+
+            <div id="stack-scraping" class="stack-content">
+                <div class="skill-list">
+                    <span class="skill-item">Playwright</span>
+                    <span class="skill-item">Yandex Maps</span>
+                    <span class="skill-item">Web scraping</span>
+                    <span class="skill-item">tkinter</span>
+                    <span class="skill-item">OpenPyXL</span>
                 </div>
             </div>
 
