@@ -20,7 +20,7 @@
 - **Тип:** Telegram-бот + мини-приложение с драфтом в реальном времени
 - **Описание:** Telegram-система для распределения рабочих между прорабами в строительной компании. Боссы создают драфты, назначают квоты прорабам, и 2–3 прораба пикают рабочих в реальном времени. WebSocket-синхронизация, автоматические 45-секундные таймауты, планирование по часовому поясу Sacramento, отслеживание доступности рабочих, уведомления в Telegram и лог истории драфтов. Задеплоено на Railway с PostgreSQL.
 - **Стек:** Node.js, TypeScript, React, Fastify, Prisma, PostgreSQL, WebSockets, Telegram API, Docker
-- **Ссылка:** [github.com/AlinaGntv/dm-draft](https://github.com/AlinaGntv/dm-draft.git) · [github.com/AlinaGntv/draft-system](https://github.com/AlinaGntv/draft-system.git)
+- **Ссылка:** [github.com/AlinaGntv/draft-system](https://github.com/AlinaGntv/draft-system.git)
 
 #### Сервис заказа одежды по меркам
 - **Тип:** Веб-приложение с личным кабинетом
